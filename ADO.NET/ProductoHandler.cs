@@ -31,13 +31,13 @@ namespace PrimerAPI
 
         /// Modificar Producto
 
-        public static int ModificarProducto(long idProducto, Producto aModificar)
+        public static int ModificarProducto(Producto aModificar)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand comando = new SqlCommand($"UPDATE Producto SET Descripciones=@descripcion,Costo=@costo,PrecioVenta=@precioVenta,Stock=@stock,IdUsuario=@idUsuario WHERE Id=@idProducto", connection);
 
-                comando.Parameters.AddWithValue("@idProducto", idProducto);
+                comando.Parameters.AddWithValue("@idProducto", aModificar.Id);
                 comando.Parameters.AddWithValue("@descripcion", aModificar.Descripcion);
                 comando.Parameters.AddWithValue("@costo", aModificar.Costo);
                 comando.Parameters.AddWithValue("@precioVenta", aModificar.PrecioVenta);
@@ -166,7 +166,7 @@ namespace PrimerAPI
         {
             Producto producto = ProductoHandler.obtenerProductoPorId(id);
             producto.Stock = cantVendidos;
-            return ProductoHandler.ModificarProducto(id, producto);
+            return ProductoHandler.ModificarProducto(producto);
         }
 
 

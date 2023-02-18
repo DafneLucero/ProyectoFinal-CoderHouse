@@ -7,5 +7,10 @@ namespace PrimerAPI.Controllers
     [ApiController]
     public class ProductoVendidoController : ControllerBase
     {
+        [HttpGet("{idUsuario}")]
+        public List<ProductoVendido> BuscarProductosVendidosPorUsuario(long idUsuario)
+        {
+            return ProductoVendidoHandler.obtenerProductosVendidosPorUsuario(idUsuario);
+        }
     }
 }

@@ -8,10 +8,17 @@ namespace PrimerAPI.Controllers
     public class UsuarioController : ControllerBase
     {
         [HttpGet("{usuario}/{contrasena}")]
-        public Usuario Login(string usuario,string contrasena)
+        public Usuario InicioSesion (string usuario,string contrasena)
         {
             return UsuarioHandler.InicioSesion(usuario,contrasena);
             
+        }
+
+        [HttpGet("{usuario}")]
+        public Usuario TraerUsuario(string usuario)
+        {
+            return UsuarioHandler.buscarUsuario(usuario);
+
         }
 
         [HttpPost]
@@ -24,6 +31,13 @@ namespace PrimerAPI.Controllers
         public void ModificarUsuario(Usuario nuevoUsuario)
         {
             UsuarioHandler.ModificarUsuario(nuevoUsuario);
+        }
+
+        [HttpDelete("{idUsuario}")]
+        public void EliminarUnUsuario (long idUsuario)
+        {
+            UsuarioHandler.EliminarUsuario(idUsuario);
+
         }
 
     }

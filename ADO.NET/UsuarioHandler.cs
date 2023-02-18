@@ -50,7 +50,7 @@ namespace PrimerAPI
 
                     return comando.ExecuteNonQuery();
                 }
-                
+
                 catch (Exception ex)
                 {
                     Console.WriteLine(" " + ex.Message);
@@ -60,13 +60,43 @@ namespace PrimerAPI
         }
 
         /// Trae el usuario con el ID indicado
-        public static Usuario buscarUsuario(long idUsuario)
+        public static Usuario buscarUsuarioPorId(long idUsuario)
         {
             Usuario buscado = new Usuario();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand comando = new SqlCommand($"SELECT * FROM Usuario WHERE Id ={idUsuario}", connection);
+                SqlCommand comando = new SqlCommand($"SELECT * FROM Usuario WHERE Id =@idUsuario", connection);
+
+                comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+                connection.Open();
+
+                SqlDataReader reader = comando.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    buscado.Id = reader.GetInt64(0);
+                    buscado.Nombre = reader.GetString(1);
+                    buscado.Apellido = reader.GetString(2);
+                    buscado.NombreUsuario = reader.GetString(3);
+                    buscado.Contraseña = reader.GetString(4);
+                    buscado.Mail = reader.GetString(5);
+
+                }
+                return buscado;
+            }
+        }
+
+        /// Trae el usuario con el nombre indicado
+        public static Usuario buscarUsuario(string usuario)
+        {
+            Usuario buscado = new Usuario();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand comando = new SqlCommand($"SELECT * FROM Usuario WHERE NombreUsuario =@usuario", connection);
+
+                comando.Parameters.AddWithValue("@usuario", usuario);
                 connection.Open();
 
                 SqlDataReader reader = comando.ExecuteReader();
@@ -92,7 +122,10 @@ namespace PrimerAPI
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand comando = new SqlCommand($"SELECT * FROM Usuario WHERE NombreUsuario = '{usuario}' AND Contraseña = '{contraseña}'", connection);
+                SqlCommand comando = new SqlCommand($"SELECT * FROM Usuario WHERE NombreUsuario = @usuario AND Contraseña = @contraseña", connection);
+
+                comando.Parameters.AddWithValue("@usuario", usuario);
+                comando.Parameters.AddWithValue("@contraseña", contraseña);
                 connection.Open();
 
                 SqlDataReader reader = comando.ExecuteReader();
@@ -108,6 +141,30 @@ namespace PrimerAPI
 
                 }
                 return buscado;
+            }
+        }
+
+        /// Eliminar Usuario
+        public static int EliminarUsuario(long idUsuario)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand comando = new SqlCommand($"DELETE FROM Usuario WHERE Id= @idUsuario", connection);
+
+                    comando.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    connection.Open();
+
+                    return comando.ExecuteNonQuery();
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(" " + ex.Message);
+                    return -1;
+                }
+
             }
         }
     }

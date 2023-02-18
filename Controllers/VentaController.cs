@@ -13,5 +13,12 @@ namespace PrimerAPI.Controllers
         {
             VentasHandler.CargarVenta(idUsuario, productosVendidos);
         }
+
+        [HttpGet("{idUsuario}")]
+        public List<Venta> BuscarVentasPorUsuario(long idUsuario)
+        {
+            return VentasHandler.ObtenerVentasPorUsuario(idUsuario);
+        }
+
     }
 }

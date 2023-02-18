@@ -7,6 +7,19 @@ namespace PrimerAPI.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
+        //Trae producto indicando su ID
+        [HttpGet("{id}")]
+        public Producto BuscarProductoID(long id)
+        {
+            return ProductoHandler.obtenerProductoPorId(id);
+        }
+
+        //Trae productos cargado por el ID del usuario indicado
+        [HttpGet("{idUsuario}")]
+        public List<Producto> BuscarProductosPorUsuario(long idUsuario)
+        {
+            return ProductoHandler.obtenerProductosPorUsuario(idUsuario);
+        }
 
         [HttpPost]
         public void CrearProducto(Producto nuevoProducto)
@@ -14,16 +27,11 @@ namespace PrimerAPI.Controllers
             ProductoHandler.CargarProducto(nuevoProducto);
         }
 
-        [HttpGet("{id}")]
-        public Producto BuscarProductoID(long id)
+        
+        [HttpPut]
+        public int ModificarProducto(Producto aModificar)
         {
-            return ProductoHandler.obtenerProductoPorId(id);
-        }
-
-        [HttpPut("{idProducto}")]
-        public int ModificarProducto(long idProducto, Producto aModificar)
-        {
-            return ProductoHandler.ModificarProducto(idProducto, aModificar);
+            return ProductoHandler.ModificarProducto(aModificar);
         }
 
         [HttpDelete("{id}")]
