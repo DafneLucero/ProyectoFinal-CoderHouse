@@ -11,7 +11,7 @@ namespace PrimerAPI
         // Atributos:
 
         private long _id;
-        private string _descripciones;
+        private string _descripcion;
         private decimal _costo;
         private decimal _precioVenta;
         private int _stock;
@@ -20,7 +20,7 @@ namespace PrimerAPI
         //getters&setters
 
         public long Id { get => _id; set => _id = value; }
-        public string Descripcion { get => _descripciones; set => _descripciones = value; }
+        public string Descripcion { get => _descripcion; set => _descripcion = value; }
         public decimal Costo { get => _costo; set => _costo = value; }
         public decimal PrecioVenta { get => _precioVenta; set => _precioVenta = value; }
         public int Stock { get => _stock; set => _stock = value; }
@@ -29,7 +29,7 @@ namespace PrimerAPI
 
         public override string ToString()
         {
-            return $" ID: {_id}\t Descripcion: {_descripciones}\t Costo: {_costo}\t Precio de Venta: {_precioVenta}\t Stock: {_stock}\t Cargado por usuario: {_idUsuario}";
+            return $" ID: {_id}\t Descripcion: {_descripcion}\t Costo: {_costo}\t Precio de Venta: {_precioVenta}\t Stock: {_stock}\t Cargado por usuario: {_idUsuario}";
         }
 
     }

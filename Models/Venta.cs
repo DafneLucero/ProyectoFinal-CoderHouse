@@ -25,6 +25,7 @@ namespace PrimerAPI
         public Venta(long idUsuario)
         {
             IdUsuario = idUsuario;
+            Comentarios = " ";
         }
 
         public override string ToString()

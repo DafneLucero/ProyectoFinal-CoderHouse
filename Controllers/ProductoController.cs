@@ -7,12 +7,12 @@ namespace PrimerAPI.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        //Trae producto indicando su ID
-        [HttpGet("{id}")]
-        public Producto BuscarProductoID(long id)
-        {
-            return ProductoHandler.obtenerProductoPorId(id);
-        }
+        ////Trae producto indicando su ID
+        //[HttpGet("{id}")]
+        //public Producto BuscarProductoID(long id)
+        //{
+        //    return ProductoHandler.obtenerProductoPorId(id);
+        //}
 
         //Trae productos cargado por el ID del usuario indicado
         [HttpGet("{idUsuario}")]

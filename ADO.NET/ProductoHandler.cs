@@ -165,7 +165,7 @@ namespace PrimerAPI
         public static int ActualizarStockProductos (long id, int cantVendidos)
         {
             Producto producto = ProductoHandler.obtenerProductoPorId(id);
-            producto.Stock = cantVendidos;
+            producto.Stock = producto.Stock - cantVendidos;
             return ProductoHandler.ModificarProducto(producto);
         }
 
